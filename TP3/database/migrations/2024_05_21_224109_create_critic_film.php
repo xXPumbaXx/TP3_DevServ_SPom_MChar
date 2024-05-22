@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('critic_film', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('critic_id')->constrained('critics')->onDelete('cascade');
             $table->foreignId('film_id')->constrained('films')->onDelete('cascade');
+            $table->text('source');
+            $table->decimal('score');
+            $table->integer('votes');
         });
     }
 

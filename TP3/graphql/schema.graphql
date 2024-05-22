@@ -2,18 +2,7 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 
 "Indicates what fields are available at the top level of a query operation."
 type Query {
-    query {
-  film(title: "Titre du Film") {
-    id
-    title
-    critics {
-      id
-      score
-      comment
-    }
-  }
-}
-
+    Film(id: ID! @eq): Film @find
 }
 
 type Actor {
