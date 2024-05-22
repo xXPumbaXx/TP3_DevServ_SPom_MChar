@@ -1,41 +1,74 @@
-"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 "Indicates what fields are available at the top level of a query operation."
 type Query {
-    "Find a single user by an identifying attribute."
-    user(
-      "Search by primary key."
-      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
-
-      "Search by email address."
-      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
-    ): User @find
-
-    "List multiple users."
-    users(
-      "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
-      name: String @where(operator: "like")
-    ): [User!]! @paginate(defaultCount: 10)
+    query {
+  film(title: "Titre du Film") {
+    id
+    title
+    critics {
+      id
+      score
+      comment
+    }
+  }
 }
 
-"Account of a person who utilizes this application."
-type User {
-    "Unique primary key."
+}
+
+type Actor {
     id: ID!
+    last_name: String!
+    first_name: String!
+    birthdate: DateTime!
+    films: [Film!]! @belongsToMany
+}
 
-    "Non-unique name."
+type Critic {
+    id: ID!
+    user_id: ID!
+    film_id: ID!
+    score: Int!
+    comment: String!
+    film: Film! @belongsTo
+    user: User! @belongsTo
+}
+
+type Film {
+    id: ID!
+    title: String!
+    release_year: Int!
+    length: Int!
+    description: String!
+    rating: Float!
+    language_id: ID!
+    special_features: String
+    image: String
+    language: Language! @belongsTo
+    critics: [Critic!]! @hasMany
+    actors: [Actor!]! @belongsToMany
+}
+
+type Language {
+    id: ID!
     name: String!
+    films: [Film!]! @hasMany
+}
 
-    "Unique email address."
+type Role {
+    id: ID!
+    name: String!
+    users: [User!]! @hasMany
+}
+
+type User {
+    id: ID!
+    login: String!
     email: String!
-
-    "When the email was verified."
+    last_name: String!
+    first_name: String!
+    role_id: ID!
     email_verified_at: DateTime
-
-    "When the account was created."
-    created_at: DateTime!
-
-    "When the account was last updated."
-    updated_at: DateTime!
+    critics: [Critic!]! @hasMany
+    role: Role! @belongsTo
 }
