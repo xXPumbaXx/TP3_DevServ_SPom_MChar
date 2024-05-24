@@ -1,0 +1,9 @@
+query {
+  CriticFilm(id: 1) {
+    id
+    score
+    film {
+      title
+    }
+  }
+}

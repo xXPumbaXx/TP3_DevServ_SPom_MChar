@@ -1,0 +1,42 @@
+## Consulter un film en particulier
+query {
+  CriticFilm(id: 1) {
+    id
+    score
+    film {
+      title
+    }
+  }
+}
+
+## Consultation de tous les acteurs d’un certain film
+query {
+  Film(id: 1) {
+    title
+    actors {
+      last_name
+      first_name
+      #birthdate
+    }
+  }
+}
+
+## Recherche de films - Cas 1 : Sans critère avec pagination (demandez la page 1)
+
+
+## Recherche de films - Cas 2 : Avec le mot-clé "AL" (sur titre ou descritpion) avec pagination (demandez la page 1)
+
+
+## Recherche de films - Cas 3 : Avec le mot-clé "AL" (sur titre ou descritpion), minimum année 2006, entre 120 et 150 minutes avec pagination (demandez la page 1)
+
+
+## Consulter les informations de l’utilisateur authentifié
+
+
+## Consulter les critiques de l’utilisateur authentifié
+
+
+## Ajout d’une critique de film
+
+
+## Ajout d’un acteur (lier l'acteur au film 1, mettre à jour l'image du film 2)

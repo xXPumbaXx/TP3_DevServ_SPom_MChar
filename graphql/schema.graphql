@@ -3,6 +3,7 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 "Indicates what fields are available at the top level of a query operation."
 type Query {
     Film(id: ID! @eq): Film @find
+    CriticFilm(id: ID! @eq): CriticFilm @find
 }
 
 type Actor {
@@ -60,4 +61,15 @@ type User {
     email_verified_at: DateTime
     critics: [Critic!]! @hasMany
     role: Role! @belongsTo
+}
+
+type CriticFilm {
+    id: ID!
+    created_at: DateTime!
+    updated_at: DateTime!
+    film_id: ID!
+    source: String!
+    score: Float!
+    votes: Int!
+    film: Film! @belongsTo
 }
