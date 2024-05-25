@@ -1,10 +1,11 @@
 ## Consulter un film en particulier
 query {
-  CriticFilm(id: 1) {
-    id
-    score
-    film {
-      title
+  Film(id: 1) {
+    title
+    critics {
+      id
+      score
+      comment
     }
   }
 }
@@ -22,10 +23,42 @@ query {
 }
 
 ## Recherche de films - Cas 1 : Sans critère avec pagination (demandez la page 1)
-
+query {
+  Films(page: 1) {
+    data {
+      id
+      title
+      release_year
+      length
+      description
+      rating
+    }
+    paginatorInfo {
+      currentPage
+      lastPage
+      total
+    }
+  }
+}
 
 ## Recherche de films - Cas 2 : Avec le mot-clé "AL" (sur titre ou descritpion) avec pagination (demandez la page 1)
-
+query SearchFilms {
+  searchFilms(title: "AL", description:"AL", page: 1) {
+    data {
+      id
+      title
+      release_year
+      length
+      description
+      rating
+    }
+    paginatorInfo {
+      currentPage
+      lastPage
+      total
+    }
+  }
+}
 
 ## Recherche de films - Cas 3 : Avec le mot-clé "AL" (sur titre ou descritpion), minimum année 2006, entre 120 et 150 minutes avec pagination (demandez la page 1)
 
