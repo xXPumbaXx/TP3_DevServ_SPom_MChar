@@ -17,14 +17,14 @@ query {
     actors {
       last_name
       first_name
-      #birthdate
+      birthdate
     }
   }
 }
 
 ## Recherche de films - Cas 1 : Sans critère avec pagination (demandez la page 1)
 query {
-  Films(page: 1) {
+  SearchFilms(page: 1) {
     data {
       id
       title
@@ -42,8 +42,8 @@ query {
 }
 
 ## Recherche de films - Cas 2 : Avec le mot-clé "AL" (sur titre ou descritpion) avec pagination (demandez la page 1)
-query SearchFilms {
-  searchFilms(title: "AL", description:"AL", page: 1) {
+query {
+  SearchFilms(title: "%AL%", page: 1) {
     data {
       id
       title
@@ -61,14 +61,8 @@ query SearchFilms {
 }
 
 ## Recherche de films - Cas 3 : Avec le mot-clé "AL" (sur titre ou descritpion), minimum année 2006, entre 120 et 150 minutes avec pagination (demandez la page 1)
-query SearchFilms {
-  searchFilms(
-    title: "AL"
-    description: "AL"
-    release_year: 2006
-    length: 120
-    page: 1
-  ) {
+query {
+  SearchFilms(title: "%AL%", release_year: 2006, min: 120, max: 150, page: 1) {
     data {
       id
       title

@@ -5,11 +5,12 @@ type Query {
     Film(id: ID! @eq): Film @find
     Films: [Film!]! @paginate(defaultCount : 10)
     CriticFilm(id: ID! @eq): CriticFilm @find
-    searchFilms(
-        title: String @where(operator: "LIKE")
-        description: String @where(operator: "LIKE")
-        release_year: Int @where(operator: "gte")
-        length: Int @where(operator: "between", min: 120, max: 150)
+    SearchFilms(
+        title: String @where(operator: "LIKE"),
+        description: String @where(operator: "LIKE"),
+        release_year: Int @where(operator: ">="),
+        min: Int @where(operator: ">=", key: "length"),
+        max: Int @where(operator: "<=", key: "length")
     ): [Film!]! @paginate(defaultCount: 10)
 }
 
@@ -17,7 +18,7 @@ type Actor {
     id: ID!
     last_name: String!
     first_name: String!
-    birthdate: DateTime!
+    birthdate: String!
     films: [Film!]! @belongsToMany
 }
 
