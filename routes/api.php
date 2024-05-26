@@ -18,10 +18,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-//Routes du TP2 ici : 
-Route::get('/films', 'App\Http\Controllers\FilmController@index');
-
-
+//Routes du TP2 ici :
 Route::group(['middleware' => ['throttle:5,1']], function () {
     Route::post('/signup', [AuthController::class, 'register']);
     Route::post('/signin', [AuthController::class, 'login']);
