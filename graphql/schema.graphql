@@ -12,6 +12,7 @@ type Query {
         min: Int @where(operator: ">=", key: "length"),
         max: Int @where(operator: "<=", key: "length")
     ): [Film!]! @paginate(defaultCount: 10)
+    me: User @auth
 }
 
 type Actor {

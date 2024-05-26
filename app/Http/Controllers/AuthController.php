@@ -54,7 +54,7 @@ class AuthController extends Controller
         $data = $request->validate([
             'login' => 'required|string',
             'password' => 'required|string',
-            'email' => 'required|string|email:rfc,dns|unique:users,email',
+            'email' => 'required|string|unique:users,email',
             'last_name' => 'required|string',
             'first_name' => 'required|string'
         ]);
@@ -64,7 +64,8 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
             'email' => $data['email'],
             'last_name' => $data['last_name'],
-            'first_name' => $data['first_name']
+            'first_name' => $data['first_name'],
+            'role_id' => 1 
         ]);
 
         $token = $user->createToken('apiToken')->plainTextToken;
