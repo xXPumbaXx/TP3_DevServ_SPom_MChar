@@ -15,8 +15,18 @@ type Query {
     me: User @auth
 }
 
-type Mutation{
-    createActor(last_name: String!, first_name: String!, birthdate: String!) @create
+type Mutation {
+    createActor(
+        last_name: String!,
+        first_name: String!,
+        birthdate: String!,
+        film_ids: [ID!]
+    ): Actor @create @auth @can(if: "role.id == 2")
+    
+    updateFilmImage(
+        film_id: ID!,
+        image: String!
+    ): Film @update @auth @can(if: "role.id == 2")
 }
 
 type Actor {
