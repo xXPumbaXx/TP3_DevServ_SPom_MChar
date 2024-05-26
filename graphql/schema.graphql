@@ -15,6 +15,14 @@ type Query {
     me: User @auth
 }
 
+type Mutation {
+    updateAverageScore(
+        score: Float!, 
+        comment: String!, 
+        film_id: Int!
+    ): Float! @inject(context:"user.id", name: "user_id")
+}
+
 type Actor {
     id: ID!
     last_name: String!
@@ -80,5 +88,5 @@ type CriticFilm {
     source: String!
     score: Float!
     votes: Int!
-    film: Film! @belongsTo
+    film: Film! @hasMany
 }

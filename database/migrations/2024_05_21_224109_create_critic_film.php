@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('critic_film', function (Blueprint $table) {
+        Schema::create('critic_films', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('film_id')->constrained('films')->onDelete('cascade');
             $table->decimal('score');
+            $table->integer('votes');
         });
     }
 
