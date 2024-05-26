@@ -46,12 +46,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function critics() 
+    public function critics() : HasMany
     {
         return $this->hasMany('App\Models\Critic');
     }
 
-    public function role() 
+    public function role() : BelongsTo
     {
         return $this->belongsTo('App\Models\Role');
     }
