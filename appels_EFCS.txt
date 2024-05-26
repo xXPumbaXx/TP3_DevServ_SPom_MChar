@@ -61,6 +61,29 @@ query SearchFilms {
 }
 
 ## Recherche de films - Cas 3 : Avec le mot-clé "AL" (sur titre ou descritpion), minimum année 2006, entre 120 et 150 minutes avec pagination (demandez la page 1)
+query SearchFilms {
+  searchFilms(
+    title: "AL"
+    description: "AL"
+    release_year: 2006
+    length: 120
+    page: 1
+  ) {
+    data {
+      id
+      title
+      release_year
+      length
+      description
+      rating
+    }
+    paginatorInfo {
+      currentPage
+      lastPage
+      total
+    }
+  }
+}
 
 
 ## Consulter les informations de l’utilisateur authentifié
