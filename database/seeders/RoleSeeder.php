@@ -16,16 +16,14 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        /*
         $enumCases = Roles::cases();
         foreach($enumCases as $enumCase)
         {
             Role::create(['name' => $enumCase->name]);
         }
-
-        /*
+        */
         $sql = file_get_contents(database_path() . '/seeders/roles.sql');
         DB::statement($sql);
-        */
-
     }
 }

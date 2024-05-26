@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('film_id')->constrained('films')->onDelete('cascade');
-            $table->text('source');
             $table->decimal('score');
-            $table->integer('votes');
         });
     }
 
