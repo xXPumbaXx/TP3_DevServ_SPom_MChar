@@ -23,20 +23,6 @@ type Mutation {
     ): Float! @inject(context:"user.id", name: "user_id")
 }
 
-type Mutation {
-    createActor(
-        last_name: String!,
-        first_name: String!,
-        birthdate: String!,
-        film_ids: [ID!]
-    ): Actor @create @auth @can(if: "role.id == 2")
-    
-    updateFilmImage(
-        film_id: ID!,
-        image: String!
-    ): Film @update @auth @can(if: "role.id == 2")
-}
-
 type Actor {
     id: ID!
     last_name: String!
