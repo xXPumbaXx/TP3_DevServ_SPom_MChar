@@ -18,12 +18,12 @@ class Critic extends Model
         'comment',
     ];
 
-    public function film() 
+    public function film(): BelongsTo
     {
         return $this->belongsTo('App\Models\Film');
     }
 
-    public function user() 
+    public function user(): BelongsTo
     {
         return $this->belongsTo('App\Models\User');
     }

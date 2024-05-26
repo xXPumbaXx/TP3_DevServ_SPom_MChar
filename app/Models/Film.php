@@ -22,18 +22,18 @@ class Film extends Model
         'image'
     ];
 
-    public function language() 
+    public function language() : BelongsTo
     {
         return $this->belongsTo('App\Models\Language');
     }
 
 
-    public function critics() 
+    public function critics() : HasMany
     {
         return $this->hasMany('App\Models\Critic');
     }
     
-    public function actors() 
+    public function actors() : BelongsToMany
     {
         return $this->belongsToMany('App\Models\Actor');
     }

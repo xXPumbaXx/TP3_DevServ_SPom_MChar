@@ -24,8 +24,36 @@ class DatabaseSeeder extends Seeder
             CriticFilmSeeder::class
         ]);
 
+        // Users
+        User::factory()->create([
+            'login' => '1844680',
+            'password' => bcrypt("Oh qu'il est beau le lavabo!"),
+            'email' => 'mcharette@csfoy.qc.ca',
+            'first_name' => 'Mikaël',
+            'last_name' => 'Charette',
+            'role_id' => 2
+        ]);
+        User::factory()->create([
+            'login' => '1944680',
+            'password' => bcrypt("Hello World!"),
+            'email' => 'jcharette@csfoy.qc.ca',
+            'first_name' => 'Jérémi',
+            'last_name' => 'Charette',
+            'role_id' => 1
+        ]);
 
-        //Ne sera pas fait dans le cadre de ce TP, les users et les critiques seront créés par vous
-        //User::factory(10)->has(Critic::factory(30))->create();
+        // Critics
+        Critic::factory()->create([
+            'score' => 60.0,
+            'comment' => "Meilleur film a vie!",
+            'film_id' => 1,
+            'user_id' => 1
+        ]);
+        Critic::factory()->create([
+            'score' => 50.0,
+            'comment' => "Pire film a vie!",
+            'film_id' => 1,
+            'user_id' => 2
+        ]);
     }
 }
