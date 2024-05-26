@@ -23,10 +23,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             CriticFilmSeeder::class
         ]);
-        User::factory(10)->
-        has(Critic::factory(30))            
-        ->create();
 
+        // Users
         User::factory()->create([
             'login' => '1844680',
             'password' => bcrypt("Oh qu'il est beau le lavabo!"),
@@ -44,7 +42,18 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1
         ]);
 
-        //Ne sera pas fait dans le cadre de ce TP, les users et les critiques seront créés par vous
-        //User::factory(10)->has(Critic::factory(30))->create();
+        // Critics
+        Critic::factory()->create([
+            'score' => 60.0,
+            'comment' => "Meilleur film a vie!",
+            'film_id' => 1,
+            'user_id' => 1
+        ]);
+        Critic::factory()->create([
+            'score' => 50.0,
+            'comment' => "Pire film a vie!",
+            'film_id' => 1,
+            'user_id' => 2
+        ]);
     }
 }
