@@ -87,10 +87,26 @@ query SearchFilms {
 
 
 ## Consulter les informations de l’utilisateur authentifié
+query Me {
+    me {
+        id
+        email
+        last_name
+        first_name
+    }
+}
 
 
 ## Consulter les critiques de l’utilisateur authentifié
-
+query Me {
+    me {
+        critics {
+            id
+            score
+            comment
+        }
+    }
+}
 
 ## Ajout d’une critique de film
 
