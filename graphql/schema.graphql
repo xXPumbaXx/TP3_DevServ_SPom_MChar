@@ -16,17 +16,21 @@ type Query {
 }
 
 type Mutation {
-    createActor(
-        last_name: String!,
-        first_name: String!,
-        birthdate: String!,
-        film_ids: [ID!]
-    ): Actor @create @auth @can(if: "role.id == 2")
-    
-    updateFilmImage(
-        film_id: ID!,
-        image: String!
-    ): Film @update @auth @can(if: "role.id == 2")
+    createActor(input: CreateActorInput): Actor @create @auth @can(if: "role.id == 2")
+    updateFilmImage(input: UpdateFilmInput): Film @update @auth @can(if: "role.id == 2")
+}
+
+input CreateActorInput {
+    last_name: String!
+    first_name: String!
+    birthdate: String!
+    film_ids: [ID!]
+    images: [UpdateFilmImageInput]
+}
+
+input UpdateFilmImageInput {
+    film_id: ID!
+    image: String!
 }
 
 type Actor {
