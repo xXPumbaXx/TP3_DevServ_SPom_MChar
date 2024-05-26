@@ -81,24 +81,12 @@ query {
 
 
 ## Consulter les informations de l’utilisateur authentifié
-query Me {
+query{
     me {
         id
         email
-        last_name
         first_name
-    }
-}
-
-
-## Consulter les critiques de l’utilisateur authentifié
-query Me {
-    me {
-        critics {
-            id
-            score
-            comment
-        }
+        last_name
     }
 }
 

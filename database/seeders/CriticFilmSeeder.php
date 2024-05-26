@@ -19,15 +19,17 @@ class CriticFilmSeeder extends Seeder
         {
             $average = 0;
             $votes = 0;
+            $count = 0;
             foreach($film->reviews as $review)
             {
                 $average += $review->score;
                 $votes += $review->votes;
+                $count += 1;
             }
             if($votes === 0) $average = 0;
-            else $average = $average / $votes;
-            $sql = "INSERT INTO critic_film (created_at, film_id, score) VALUES ('". date("Y-m-d H:i:s") . "', " . $film->id . ", '" . number_format((float)$average, 1, '.', '') . "')";
-            #var_dump($sql);
+            else $average = $average / $count;
+            $sql = "INSERT INTO critic_films (created_at, film_id, score, votes) VALUES ('". date("Y-m-d H:i:s") . "', " . $film->id . ", '" . number_format((float)$average, 1, '.', '') . "', " . $votes . ")";
+            var_dump($sql);
             DB::statement($sql);
         }
     }
