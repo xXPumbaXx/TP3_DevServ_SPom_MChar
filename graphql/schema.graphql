@@ -15,6 +15,10 @@ type Query {
     me: User @auth
 }
 
+type Mutation{
+    createActor(last_name: String!, first_name: String!, birthdate: String!) @create
+}
+
 type Actor {
     id: ID!
     last_name: String!
