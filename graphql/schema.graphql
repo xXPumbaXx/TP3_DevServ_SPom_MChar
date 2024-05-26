@@ -18,6 +18,11 @@ type Query {
 type Mutation {
     createActor(input: CreateActorInput): Actor @create @auth @can(if: "role.id == 2")
     updateFilmImage(input: UpdateFilmInput): Film @update @auth @can(if: "role.id == 2")
+    updateAverageScore(
+        score: Float!, 
+        comment: String!, 
+        film_id: Int!
+    ): Float! @inject(context:"user.id", name: "user_id")
 }
 
 input CreateActorInput {
