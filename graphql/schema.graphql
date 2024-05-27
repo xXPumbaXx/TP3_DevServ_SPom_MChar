@@ -120,5 +120,5 @@ type CriticFilm {
     source: String!
     score: Float!
     votes: Int!
-    film: Film! @hasMany
+    film: Film! @belongsTo
 }
