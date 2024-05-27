@@ -1,28 +1,60 @@
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
-"Indicates what fields are available at the top level of a query operation."
+# Query
 type Query {
-    Film(id: ID! @eq): Film @find
-    Films: [Film!]! @paginate(defaultCount : 10)
-    CriticFilm(id: ID! @eq): CriticFilm @find
-    SearchFilms(
-        title: String @where(operator: "LIKE"),
-        description: String @where(operator: "LIKE"),
-        release_year: Int @where(operator: ">="),
-        min: Int @where(operator: ">=", key: "length"),
-        max: Int @where(operator: "<=", key: "length")
-    ): [Film!]! @paginate(defaultCount: 10)
+    film(input: FilmInput): Film @find
+    films(input: FilmsInput! @spread): [Film!]! @paginate(defaultCount: 10)
     me: User @auth
 }
 
-type Mutation {
-    updateAverageScore(
-        score: Float!, 
-        comment: String!, 
-        film_id: Int!
-    ): Float! @inject(context:"user.id", name: "user_id")
+input FilmInput {
+    id: ID! @eq @rules(apply: ["required"])
 }
 
+input FilmsInput {
+    title: String @where(operator: "LIKE"),
+    description: String @where(operator: "LIKE"),
+    release_year: Int @where(operator: ">="),
+    min: Int @where(operator: ">=", key: "length"),
+    max: Int @where(operator: "<=", key: "length")
+}
+
+
+
+# Mutation
+type Mutation {
+    updateAverageScore(input: UpdateAverageScoreInput! @spread): AverageScoreOutput! @inject(context:"user.id", name: "user_id")
+    addActor(input: AddActorInput! @spread): Actor! @can(ability: "create")
+}
+
+type AverageScoreOutput {
+    score: Float!,
+    votes: Int!,
+    film_id: ID
+}
+
+input UpdateAverageScoreInput {
+    score: Float! @rules(apply: ["required"]), 
+    comment: String! @rules(apply: ["required"]), 
+    film_id: Int! @rules(apply: ["required"])
+}
+
+input AddActorInput {
+    last_name: String! @rules(apply: ["required"]),
+    first_name: String! @rules(apply: ["required"]),
+    birthdate: String! @rules(apply: ["required"]),
+    associated_films: [ID!]! @rules(apply: ["required"]),
+    update_film_image: [UpdateFilmImageInput!]! @rules(apply: ["required"])
+}
+
+input UpdateFilmImageInput {
+    id: ID! @rules(apply: ["required"]),
+    image: String! @rules(apply: ["required"])
+}
+
+
+
+# Tables
 type Actor {
     id: ID!
     last_name: String!
